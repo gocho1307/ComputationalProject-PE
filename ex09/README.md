@@ -26,13 +26,13 @@ ___
 
 Com o objetivo de comparar os dois métodos e, em particular, avaliar a adequação da segunda aproximação, implemente os seguintes passos no `R`:
 
-1. Fixe a semente em $1710$ e para cada valor de $n \in \\{30,50,100,200,300,500,1000\\}$:
+1. Fixe a semente em $1166$ e para cada valor de $n \in \\{30,50,100,200,300,500,1000\\}$:
 
-      a. gere $k = 2000$ amostras de tamanho $n$ de uma distribuição de Bernoulli com parâmetro $p = 0.7$;
+      a. gere $k = 2500$ amostras de tamanho $n$ de uma distribuição de Bernoulli com parâmetro $p = 0.5$;
 
       b. para cada amostra gerada, calcule a diferença entre os comprimentos dos intervalos de confiança construídos pelo **Método 2** e pelo **Método 1**, com um nível de confiança aproximado $\gamma = 0.97$.
 
-      c. calcule a média das $k = 2000$ diferenças anteriores.
+      c. calcule a média das $k = 2500$ diferenças anteriores.
 
 2. Construa um gráfico que ilustre a variação das diferenças médias em função do tamanho da amostra.
 

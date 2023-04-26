@@ -16,6 +16,6 @@ i. Simula-se um valor, $u$, proveniente de uma distribuição uniforme no interv
 
 ii. Se $F_{X}(x−1) < u \leq F_{X}(x)$, aceita-se $x$ como um valor simulado de $X$, onde $F_{X}(x)$ é a função de distribuição de $X$.
 
-Fixando a semente em $1331$, implemente este método de simulação estocástica repetindo os passos anteriores até obter uma amostra de dimensão $n = 1071$.
+Fixando a semente em $1506$, implemente este método de simulação estocástica repetindo os passos anteriores até obter uma amostra de dimensão $n = 1197$.
 
 Indique a proporção de valores simulados que são superiores à soma da média com o desvio padrão amostrais, de entre os que são superiores à respetiva média amostral. Apresente o resultado com 4 casas decimais.
