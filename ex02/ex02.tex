@@ -1,14 +1,12 @@
 \documentclass[12pt,a4paper]{article}
 \usepackage[legalpaper, portrait, margin=2cm]{geometry}
 \usepackage[portuguese]{babel}
-\usepackage{amsmath}
-\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{indentfirst}
 \usepackage{listings}
-\usepackage{tikz}
 \usepackage{xcolor}
 
 \graphicspath{ {./} }
@@ -59,18 +57,35 @@
 
 \begin{document}
 
-% Introdução sobre o exercício em questão
-
 % Código em R para resolver o exercício
 \begin{lstlisting}[language=R]
+library("ggplot2")
+library("dplyr")
+
+df <- read.csv("TIME_USE_24092022.csv")
+names(df) <- c("country", "occupation", "sex", "time")
+
+df_filtered <- df %>% filter(
+    country != "África do Sul" & sex == "Total" &
+    (occupation == "Cuidados pessoais" | occupation == "Trabalho não remunerado")
+)
+
+boxplot(
+    time ~ occupation,
+    data = df_filtered,
+    main = "Análise dos tempos médios das ocupações Cuidados pessoais e Trabalho não remunerado",
+    xlab = "Ocupação",
+    ylab = "Tempo (minutos)",
+    col = "#2a9d8f"
+)
 \end{lstlisting}
 
-% Gráficos para resolver o exercício
-\begin{tikzpicture}[remember picture, overlay]
-  \node [shift = {(-4cm, -9.25cm)}] at (current page.north east)
-    { \includegraphics[scale = 0.5]{./ex02.png} };
-\end{tikzpicture}
+\qquad
 
-% Conclusão sobre os gráficos e sobre o exercício
+% Gráfico para resolver o exercício
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale = 0.6]{./ex02.png}
+\end{figure}
 
 \end{document}
