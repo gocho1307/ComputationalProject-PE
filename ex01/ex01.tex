@@ -1,14 +1,12 @@
 \documentclass[12pt,a4paper]{article}
 \usepackage[legalpaper, portrait, margin=2cm]{geometry}
 \usepackage[portuguese]{babel}
-\usepackage{amsmath}
-\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{indentfirst}
 \usepackage{listings}
-\usepackage{svg}
 \usepackage{tikz}
 \usepackage{xcolor}
 
@@ -60,18 +58,47 @@
 
 \begin{document}
 
-% Introdução sobre o exercício em questão
-
 % Código em R para resolver o exercício
 \begin{lstlisting}[language=R]
+library("openxlsx")
+library("ggplot2")
+library("dplyr")
+
+df <- read.xlsx(
+  xlsxFile = "econ.xlsx", sheet = 1,
+  cols = c(1, 4, 6), detectDates = TRUE
+)
+df_filtered <- df %>% filter(tempo >= '1996-01-01')
+
+# Function that normalizes all the variables of the vector
+normalize_vector <- function(vector) {
+    len <- length(vector)
+    average <- mean(vector)
+    standard_deviation <- sd(vector)
+    for (i in 1:len) {
+        vector[i] = (vector[i] - average) / standard_deviation
+    }
+    return(vector)
+}
+df_filtered$tpp <- normalize_vector(df_filtered$tpp)
+df_filtered$ndesemp <- normalize_vector(df_filtered$ndesemp)
+
+df_filtered %>%
+  ggplot(aes(x = ndesemp, y = tpp)) +
+  geom_point(colour = "#e76f51") +
+  stat_smooth(method = loess, color = "#2a9d8f") +
+  ggtitle("Relação entre Número de Desempregados (ndesemp) e Taxa de Poupança Pessoal (tpp)") +
+  labs(subtitle = "Dados para anos superiores ou iguais a 1996") +
+  xlab("Número de Desempregados (ndesemp)") +
+  ylab("Taxa de Poupança Pessoal (tpp)")
 \end{lstlisting}
 
-% Gráficos para resolver o exercício
-\begin{tikzpicture}[remember picture, overlay]
-  \node [shift = {(-4cm, -9.25cm)}] at (current page.north east)
-    { \includesvg[scale=0.4]{test} };
-\end{tikzpicture}
+\qquad
 
-% Conclusão sobre os gráficos e sobre o exercício
+% Gráfico para resolver o exercício
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale = 0.8]{./ex01.png}
+\end{figure}
 
 \end{document}
