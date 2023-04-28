@@ -59,14 +59,41 @@
 
 % Código em R para resolver o exercício
 \begin{lstlisting}[language=R]
+library("ggplot2")
+library("dplyr")
+
+df <- read.table(
+  "GENDER_EMP_19032023152556091.txt", sep = "\t", header = TRUE,
+  comment.char = "", na.strings = c(""," ", NA), quote = ""
+)
+
+df_filtered <- df %>% filter(
+    Time == 2015 & IND == "EMP3" &
+    Country == "United Kingdom" &
+    Age.Group %in% c("15-24", "25-54", "55-64") &
+    Sex %in% c("Men", "Women")
+)
+
+ggplot(df_filtered, aes(x = Age.Group, y = Value, fill = factor(Sex))) +
+  geom_col(position = "dodge", colour = "black") +
+  geom_text(
+    aes(label = Value), vjust = 1.5,
+    colour = "black", size = 6,
+    position = position_dodge(.9)
+  ) +
+  scale_fill_brewer(palette = "Pastel1") +
+  xlab("Age Group") +
+  ylab("Unemployment Rate") +
+  labs(fill = "Sex", subtitle = "in the United Kingdom") +
+  ggtitle("Unemployment Rate, by Sex and Age Group during 2015")
 \end{lstlisting}
 
 \qquad
 
-% Gráficos para resolver o exercício
+% Gráfico para resolver o exercício
 \begin{figure}[h]
   \centering
-  \includegraphics[scale = 0.6]{./ex03.png}
+  \includegraphics[scale = 0.8]{./ex03.png}
 \end{figure}
 
 \end{document}
