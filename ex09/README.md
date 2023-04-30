@@ -6,7 +6,7 @@ $$Z_{1} = \frac{\bar{X} − p}{\sqrt{\frac{p (1 − p)}{n}}}\\; \mathop\sim^a\\;
 
 obtida pela aplicação do teorema do limite central a uma amostra aleatória de tamanho $n$ suficientemente grande da referida população. Duas variantes são possíveis:
 
-**Método 1**
+**Método 1:**
 
 Usando $Z_{1}$, não é difícil mostrar que os limites do intervalo de confiança são as soluções da seguinte equação do segundo grau em $p$:
 
@@ -14,7 +14,7 @@ $$\bar{X}^{2} − 2p\bar{X} + p^{2} − z^{2} \frac{p (1 − p)}{n} = 0$$
 
 em que $\bar{X}$ representa a média amostral e $z = \Phi^{−1} \left( \frac{1 + \gamma}{2} \right)$, para um nível de confiança aproximado $\gamma \in\\; ]0,1[$.
 
-**Método 2**
+**Método 2:**
 
 Uma segunda aproximação conduz à variável fulcral
 

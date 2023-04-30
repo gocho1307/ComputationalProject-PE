@@ -29,6 +29,7 @@ jobs:
             any::dplyr
             any::tidyr
             any::IRkernel
+            any::Rlab
 
       - name: Setup R kernel for jupyter
         run: IRkernel::installspec()
