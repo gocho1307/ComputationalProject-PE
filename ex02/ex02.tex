@@ -57,6 +57,14 @@
 
 \begin{document}
 
+% Introdução sobre o exercício em questão
+O objetivo deste exercício é o de comparar, através de dois diagramas de extremos e quantis, os tempos médios diários (em minutos)
+registados para Homens e Mulheres entre os 15 e os 64 anos em duas ocupações distintas: Cuidados pessoais e Trabalho não remunerado.
+Sendo que o conjunto de dados, enviados por diversos países para a \href{https://stats.oecd.org/Index.aspx?DataSetCode=TIME_USE}{OCDE}, encontram-se num ficheiro \texttt{.csv}.
+Para tal, recorreu-se ao seguinte trecho de código em \texttt{R} (utilizando as bibliotecas \texttt{ggplot2} e \texttt{dplyr}):
+
+\quad
+
 % Código em R para resolver o exercício
 \begin{lstlisting}[language=R]
 library("ggplot2")
@@ -67,7 +75,7 @@ names(df) <- c("country", "occupation", "sex", "time")
 
 df_filtered <- df %>% filter(
     country != "África do Sul" & sex == "Total" &
-    (occupation == "Cuidados pessoais" | occupation == "Trabalho não remunerado")
+    occupation %in% c("Cuidados pessoais", "Trabalho não remunerado")
 )
 
 boxplot(
@@ -80,7 +88,7 @@ boxplot(
 )
 \end{lstlisting}
 
-\qquad
+\quad
 
 % Gráfico para resolver o exercício
 \begin{figure}[h]
