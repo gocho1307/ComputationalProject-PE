@@ -16,7 +16,7 @@
   filecolor=magenta,
   urlcolor=blue,
   citecolor=blue,
-  pdftitle={Exercício 8 - Projeto Computacional PE 2022/2023 LEIC-A},
+  pdftitle={Exercício 1 - Projeto Computacional PE 2022/2023 LEIC-A},
   pdfpagemode=FullScreen,
 }
 
@@ -24,7 +24,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{Grupo \textbf{11}}
-\lhead{Exercício 8 - Projeto Computacional PE 2022/2023 LEIC-A}
+\lhead{Exercício 1 - Projeto Computacional PE 2022/2023 LEIC-A}
 \cfoot{Gonçalo Bárias (103124), Raquel Braunschweig (102624) e Vasco Paisana (102533)}
 
 \renewcommand{\footrulewidth}{0.2pt}
@@ -41,28 +41,50 @@
   numberstyle=\tiny\color{codegray},
   % keywordstyle=\color{magenta},
   % stringstyle=\color{codepurple},
-  basicstyle=\ttfamily\footnotesize,
-  breakatwhitespace=false,
-  breaklines=true,
-  captionpos=b,
-  keepspaces=true,
-  numbers=left,
-  numbersep=5pt,
-  showspaces=false,
-  showstringspaces=false,
-  showtabs=false,
-  tabsize=2
-}
-\lstset{style=mystyle}
+  basicstyle=\ttfamily\footnotesize, breakatwhitespace=false, breaklines=true,
+  captionpos=b, keepspaces=true, numbers=left, numbersep=5pt, showspaces=false,
+  showstringspaces=false, showtabs=false, tabsize=2 } \lstset{style=mystyle}
 
 \begin{document}
 
 % Introdução sobre o exercício em questão
+O objetivo deste exercício é comparar uma distribuição cauchy ordenada com os
+quantis de probabilidade $\frac{i}{194 + 1}, i = 1,…,194$ dessa população e de
+uma população normal com valor esperado $\mu = 3.8$ e variância $\sigma^{2} =
+  4$. Para tal, recorreu-se ao seguinte trecho de código em \texttt{R}:
 
 \quad
 
 % Código em R para resolver o exercício
 \begin{lstlisting}[language=R]
+SEED <- 1657
+SAMPLE_SIZE <- 194
+CAUCHY_LOCALIZATION <- 3.2
+CAUCHY_SCALE <- 1.2
+NORMAL_EXPECTED <- 3.8
+NORMAL_VARIANCE <- 4
+set.seed(SEED)
+
+cauchy_sample <- rcauchy(SAMPLE_SIZE, CAUCHY_LOCALIZATION, CAUCHY_SCALE)
+
+prob_quantiles <- seq(1/195, 194/195, by = 1/195)
+cauchy_quantiles <- quantile(cauchy_sample, probs = prob_quantiles)
+
+normal_sample <- rnorm(SAMPLE_SIZE, mean = NORMAL_EXPECTED, sd = sqrt(NORMAL_VARIANCE))
+normal_quantiles <-quantile(normal_sample, probs = prob_quantiles)
+
+ordered_cauchy_sample <- sort(cauchy_sample)
+
+plot(ordered_cauchy_sample, normal_quantiles, main = "QQ Plot: Ordered Cauchy Sample vs Quantiles",
+     xlab = "Ordered Cauchy Sample", ylab = "Quantiles",
+     xlim = range(ordered_cauchy_sample), ylim = range(normal_quantiles, cauchy_quantiles))
+
+points(ordered_cauchy_sample, cauchy_quantiles, col = "red", pch = 16)
+abline(0, 1, col = "gray", lty = 2)
+
+legend("topleft", legend = c("Normal Quantiles", "Cauchy Quantiles", "y = x"),
+       col= c("black", "red", "gray"), pch = c(16, 16, NA), lty = c(NA, NA, 2))
+
 \end{lstlisting}
 
 \quad
