@@ -89,10 +89,8 @@ method_1 <- function(samples, conf_level) {
     len <- length(samples)
     mean <- mean(samples)
     z <- qnorm((1 + conf_level) / 2)
-    denom <- 2 * (1 + z**2 / len)
-    upper <- ((2 * mean + z**2 / len) + sqrt(4 * mean * z**2 * (1 - mean) / len + z**4 / len**2)) / denom
-    lower <- ((2 * mean + z**2 / len) - sqrt(4 * mean * z**2 * (1 - mean) / len + z**4 / len**2)) / denom
-    return(abs(upper - lower))
+    sols <- polyroot(c(mean**2, -2 * mean - z**2 / len, 1 + z**2 / len))
+    return(abs(sols[2] - sols[1]))
 }
 
 method_2 <- function(samples, conf_level) {
