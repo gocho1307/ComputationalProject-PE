@@ -88,14 +88,13 @@ normalize_vector <- function(vector) {
 df_filtered$tpp <- normalize_vector(df_filtered$tpp)
 df_filtered$ndesemp <- normalize_vector(df_filtered$ndesemp)
 
-df_filtered %>%
-  ggplot(aes(x = ndesemp, y = tpp)) +
-  geom_point(colour = "#e76f51") +
-  stat_smooth(method = loess, color = "#2a9d8f") +
-  ggtitle("Relação entre Número de Desempregados (ndesemp) e Taxa de Poupança Pessoal (tpp)") +
-  labs(subtitle = "Dados para anos superiores ou iguais a 1996") +
-  xlab("Número de Desempregados (ndesemp)") +
-  ylab("Taxa de Poupança Pessoal (tpp)")
+ggplot(df_filtered, aes(tempo)) +
+  geom_line(aes(y = ndesemp, colour = "ndesemp")) +
+  geom_line(aes(y = tpp, colour = "tpp")) +
+  xlab("Ano") +
+  ylab("Variáveis normalizadas") +
+  ggtitle("Evolução do Número de Desempregados (ndesemp) e Taxa de Poupança Pessoal (tpp)") +
+  labs(colour = "Variáveis", subtitle = "Dados para anos superiores ou iguais a 1996")
 \end{lstlisting}
 
 \quad

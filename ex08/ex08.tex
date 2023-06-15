@@ -16,7 +16,7 @@
   filecolor=magenta,
   urlcolor=blue,
   citecolor=blue,
-  pdftitle={Exercício 1 - Projeto Computacional PE 2022/2023 LEIC-A},
+  pdftitle={Exercício 8 - Projeto Computacional PE 2022/2023 LEIC-A},
   pdfpagemode=FullScreen,
 }
 
@@ -24,7 +24,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{Grupo \textbf{11}}
-\lhead{Exercício 1 - Projeto Computacional PE 2022/2023 LEIC-A}
+\lhead{Exercício 8 - Projeto Computacional PE 2022/2023 LEIC-A}
 \cfoot{Gonçalo Bárias (103124), Raquel Braunschweig (102624) e Vasco Paisana (102533)}
 
 \renewcommand{\footrulewidth}{0.2pt}
@@ -48,10 +48,10 @@
 \begin{document}
 
 % Introdução sobre o exercício em questão
-O objetivo deste exercício é comparar uma distribuição cauchy ordenada com os
-quantis de probabilidade $\frac{i}{194 + 1}, i = 1,…,194$ dessa população e de
-uma população normal com valor esperado $\mu = 3.8$ e variância $\sigma^{2} =
-  4$. Para tal, recorreu-se ao seguinte trecho de código em \texttt{R}:
+O objetivo deste exercício é comparar valores gerados e ordenados por ordem crescente de uma distribuição cauchy com os
+quantis de probabilidade $\frac{i}{195}, i = 1,…,194$ dessa população e de uma população normal de valor esperado
+$\mu = 3.8$ e variância $\sigma^{2} = 4$.
+Para tal, recorreu-se ao seguinte trecho de código em \texttt{R}:
 
 \quad
 
@@ -67,24 +67,20 @@ set.seed(SEED)
 
 cauchy_sample <- rcauchy(SAMPLE_SIZE, CAUCHY_LOCALIZATION, CAUCHY_SCALE)
 
-prob_quantiles <- seq(1/195, 194/195, by = 1/195)
+prob_quantiles <- seq(1 / 195, 194 / 195, by = 1 / 195)
 cauchy_quantiles <- quantile(cauchy_sample, probs = prob_quantiles)
+normal_quantiles <- qnorm(prob_quantiles, mean = NORMAL_EXPECTED, sd = sqrt(NORMAL_VARIANCE))
 
-normal_sample <- rnorm(SAMPLE_SIZE, mean = NORMAL_EXPECTED, sd = sqrt(NORMAL_VARIANCE))
-normal_quantiles <-quantile(normal_sample, probs = prob_quantiles)
+sorted_cauchy_sample <- sort(cauchy_sample)
 
-ordered_cauchy_sample <- sort(cauchy_sample)
-
-plot(ordered_cauchy_sample, normal_quantiles, main = "QQ Plot: Ordered Cauchy Sample vs Quantiles",
-     xlab = "Ordered Cauchy Sample", ylab = "Quantiles",
-     xlim = range(ordered_cauchy_sample), ylim = range(normal_quantiles, cauchy_quantiles))
-
-points(ordered_cauchy_sample, cauchy_quantiles, col = "red", pch = 16)
-abline(0, 1, col = "gray", lty = 2)
-
-legend("topleft", legend = c("Normal Quantiles", "Cauchy Quantiles", "y = x"),
-       col= c("black", "red", "gray"), pch = c(16, 16, NA), lty = c(NA, NA, 2))
-
+plot(sorted_cauchy_sample, normal_quantiles, main = "QQ Plot: Valores Cauchy Gerados (Ordenados) vs Quantis de Probabilidade",
+     xlab = "Valores Cauchy Gerados (Ordenados)", ylab = "Quantis de Probabilidade",
+     xlim = range(sorted_cauchy_sample), ylim = range(normal_quantiles, cauchy_quantiles))
+points(sorted_cauchy_sample, cauchy_quantiles, col = "#f8766d", pch = 19)
+points(sorted_cauchy_sample, normal_quantiles, col = "#00bfc4", pch = 19)
+abline(0, 1, col = "black", lty = 2)
+legend("topleft", legend = c("Normal", "Cauchy", "y = x"),
+       col = c("#00bfc4", "#f8766d", "black"), pch = c(19, 19, NA), lty = c(NA, NA, 2))
 \end{lstlisting}
 
 \quad
@@ -92,7 +88,7 @@ legend("topleft", legend = c("Normal Quantiles", "Cauchy Quantiles", "y = x"),
 % Gráfico para resolver o exercício
 \begin{figure}[h]
   \centering
-  \includegraphics[scale = 0.8]{./ex08.png}
+  \includegraphics[scale = 0.77]{./ex08.png}
 \end{figure}
 
 \end{document}

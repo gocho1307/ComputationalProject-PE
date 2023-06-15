@@ -78,14 +78,12 @@ df_filtered <- df %>% filter(
     occupation %in% c("Cuidados pessoais", "Trabalho não remunerado")
 )
 
-boxplot(
-    time ~ occupation,
-    data = df_filtered,
-    main = "Análise dos tempos médios das ocupações Cuidados pessoais e Trabalho não remunerado",
-    xlab = "Ocupação",
-    ylab = "Tempo (minutos)",
-    col = "#2a9d8f"
-)
+ggplot(df_filtered, aes(x = occupation, y = time, fill = occupation)) +
+  geom_boxplot()+
+  xlab("Ocupação") +
+  ylab("Tempo médio diário (minutos)") +
+  ggtitle("Análise dos tempos médios em duas ocupações") +
+  labs(fill = "Ocupação", subtitle = "Cuidados pessoais e Trabalho não remunerado")
 \end{lstlisting}
 
 \quad
@@ -93,7 +91,7 @@ boxplot(
 % Gráfico para resolver o exercício
 \begin{figure}[h]
   \centering
-  \includegraphics[scale = 0.6]{./ex02.png}
+  \includegraphics[scale = 0.8]{./ex02.png}
 \end{figure}
 
 \end{document}

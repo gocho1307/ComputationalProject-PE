@@ -83,17 +83,16 @@ df_filtered <- df %>% filter(
 )
 
 ggplot(df_filtered, aes(x = Age.Group, y = Value, fill = factor(Sex))) +
-  geom_col(position = "dodge", colour = "black") +
+  geom_col(position = "dodge") +
   geom_text(
     aes(label = Value), vjust = 1.5,
     colour = "black", size = 6,
     position = position_dodge(.9)
   ) +
-  scale_fill_brewer(palette = "Pastel1") +
   xlab("Age Group") +
   ylab("Unemployment Rate") +
-  labs(fill = "Sex", subtitle = "in the United Kingdom") +
-  ggtitle("Unemployment Rate, by Sex and Age Group during 2015")
+  ggtitle("Unemployment Rate, by Sex and Age Group during 2015") +
+  labs(fill = "Sex", subtitle = "in the United Kingdom")
 \end{lstlisting}
 
 \quad

@@ -114,12 +114,12 @@ for (n in N) {
 }
 
 ggplot(df, aes(x = n, y = difference)) +
-  geom_line(color = "#e76f51") +
-  geom_point(color = "#e76f51") +
+  geom_line(colour = "#f8766d") +
+  geom_point(colour = "#f8766d") +
   xlab("Dimensão da Amostra") +
   ylab("Variação das Diferenças Médias") +
-  labs(title = "Relação entre Variação das Diferenças Médias e Dimensão da Amostra",
-    subtitle = sprintf("semente = %d | k = %d | p = %.2f | γ = %.2f",
+  ggtitle("Relação entre Variação das Diferenças Médias e Dimensão da Amostra") +
+  labs(subtitle = sprintf("semente = %d | k = %d | p = %.2f | γ = %.2f",
       SEED, SAMPLE_COUNT, BERNOULLI_P, CONF_LEVEL))
 \end{lstlisting}
 
